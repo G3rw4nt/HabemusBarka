@@ -2,9 +2,11 @@
   "name": "habemusbarka",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"scripts": {
+  "dev": "ts-node ./src/index.ts",
+  "deploy": "ts-node ./src/deploy-commands.ts"
+}
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/G3rw4nt/HabemusBarka.git"

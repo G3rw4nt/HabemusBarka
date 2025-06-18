@@ -1,0 +1,15 @@
+export const MESSAGES = {
+  mustBeOnVoice: '🚫 Musisz być na kanale głosowym!',
+  alreadyPlaying: '🛑 HabemusBarka już gra na tym serwerze!',
+  started: '🎶 Niech zabrzmi HabemusBarka!',
+  notConnected: '🚫 Bot nie jest połączony z kanałem.',
+  disconnected: '👋 HabemusBarka opuszcza kanał.',
+  autoPlayTime: '⏰ Czas na Barkę automatyczną',
+  noChannels: (guildName: string) => `⚠️ Brak aktywnych kanałów na "${guildName}"`,
+  joined: (version: string, guild: string, channel: string) => `🎵 Odtwarzanie ${version} na "${guild}" w kanale "${channel}"`,
+  ended: (version: string, guild: string) => `✅ ${version} zakończona na "${guild}"`,
+  timeout: (guild: string) => `⏱️ Timeout – opuszczam kanał na "${guild}"`,
+  failedConnect: (channel: string) => `❌ Nie udało się połączyć do "${channel}"`,
+  error: (guild: string, msg: string) => `❌ Błąd audio na "${guild}": ${msg}`,
+  manualDisconnect: (guild: string) => `🧹 Bot opuszcza kanał na serwerze "${guild}" (ręczne wywołanie)`,
+};
