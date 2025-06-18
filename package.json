@@ -1,0 +1,32 @@
+{
+  "name": "habemusbarka",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G3rw4nt/HabemusBarka.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/G3rw4nt/HabemusBarka/issues"
+  },
+  "homepage": "https://github.com/G3rw4nt/HabemusBarka#readme",
+  "description": "",
+  "dependencies": {
+    "@discordjs/voice": "^0.18.0",
+    "discord.js": "^14.20.0",
+    "dotenv": "^16.5.0",
+    "ffmpeg-static": "^5.2.0",
+    "node-cron": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
