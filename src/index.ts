@@ -5,6 +5,7 @@ import { safePlayBarkaOnChannel, activeConnections } from './utils';
 import { log } from './logger';
 import { MESSAGES } from './messages';
 import { getVoiceConnection } from '@discordjs/voice';
+import { setAutoplay, isAutoplayEnabled } from './settings';
 
 config();
 
@@ -41,7 +42,7 @@ client.on(Events.InteractionCreate, async interaction => {
     safePlayBarkaOnChannel(member.voice.channel as VoiceChannel);
   }
 
-  if (commandName === 'leave') {
+  if (commandName === 'amen') {
     const conn = getVoiceConnection(guild.id);
     if (conn) {
       conn.destroy();
@@ -51,6 +52,27 @@ client.on(Events.InteractionCreate, async interaction => {
     } else {
       await interaction.reply({ content: MESSAGES.notConnected, ephemeral: true });
     }
+  }
+
+  if (commandName === 'autobarka') {
+    const option = interaction.options.getString('tryb');
+    const enabled = option === 'on';
+
+    setAutoplay(guild.id, enabled);
+    await interaction.reply(
+      enabled
+        ? MESSAGES.autoBarkaEnabled
+        : MESSAGES.autoBarkaDisabled
+    );
+  }
+
+  if (commandName === 'status') {
+    const enabled = isAutoplayEnabled(guild.id);
+    await interaction.reply(
+      enabled
+        ? MESSAGES.autoBarkaEnabled
+        : MESSAGES.autoBarkaDisabled
+    );
   }
 });
 

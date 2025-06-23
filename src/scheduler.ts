@@ -3,12 +3,18 @@ import { Client, ChannelType, VoiceChannel } from 'discord.js';
 import { safePlayBarkaOnChannel } from './utils';
 import { log } from './logger';
 import { MESSAGES } from './messages';
+import { isAutoplayEnabled } from './settings';
 
 export function startScheduler(client: Client) {
   cron.schedule('37 21 * * *', () => {
-    log(MESSAGES.autoPlayTime);
+    log.info(MESSAGES.autoPlayTime);
 
     for (const [_, guild] of client.guilds.cache) {
+      if (!isAutoplayEnabled(guild.id)) {
+        log.info(MESSAGES.autoBarkaSkip(guild.name));
+        continue;
+      }
+
       guild.channels.fetch().then(channels => {
         const voiceChannels = channels
           .filter(
@@ -17,14 +23,14 @@ export function startScheduler(client: Client) {
           ) as Map<string, VoiceChannel>;
 
         if (voiceChannels.size === 0) {
-          log(MESSAGES.noChannels(guild.name));
+          log.error(MESSAGES.noChannels(guild.name));
           return;
         }
 
         const random = Array.from(voiceChannels.values())[Math.floor(Math.random() * voiceChannels.size)];
         safePlayBarkaOnChannel(random);
       }).catch(err => {
-        log(`❌ Błąd podczas przeglądania kanałów na serwerze "${guild.name}": ${err.message}`);
+        log.error(MESSAGES.channelError(guild.name, err instanceof Error ? err.message : String(err)));
       });
     }
   }, {

@@ -22,7 +22,7 @@ export function safePlayBarkaOnChannel(channel: VoiceChannel) {
   const guild = channel.guild;
 
   if (activeConnections.has(guild.id)) {
-    log(MESSAGES.alreadyPlaying);
+    log.warn(MESSAGES.alreadyPlaying);
     return;
   }
 
@@ -43,31 +43,31 @@ export function safePlayBarkaOnChannel(channel: VoiceChannel) {
 
     conn.subscribe(player);
     player.play(resource);
-    log(MESSAGES.joined(versionLabel, guild.name, channel.name));
+    log.info(MESSAGES.joined(versionLabel, guild.name, channel.name));
 
     const timeout = setTimeout(() => {
       conn.destroy();
       activeConnections.delete(guild.id);
-      log(MESSAGES.timeout(guild.name));
+      log.warning(MESSAGES.timeout(guild.name));
     }, PLAY_TIMEOUT_MS);
 
     player.once(AudioPlayerStatus.Idle, () => {
       clearTimeout(timeout);
       conn.destroy();
       activeConnections.delete(guild.id);
-      log(MESSAGES.ended(versionLabel, guild.name));
+      log.info(MESSAGES.ended(versionLabel, guild.name));
     });
 
     player.once('error', err => {
       clearTimeout(timeout);
       conn.destroy();
       activeConnections.delete(guild.id);
-      log(MESSAGES.error(guild.name, err.message));
+      log.error(MESSAGES.error(guild.name, err.message));
     });
 
-  }).catch(() => {
+  }).catch( err => {
     conn.destroy();
     activeConnections.delete(guild.id);
-    log(MESSAGES.failedConnect(channel.name));
+    log.error(MESSAGES.failedConnect(channel.name, err instanceof Error ? err.message : String(err)));
   });
 }
