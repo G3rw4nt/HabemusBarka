@@ -58,14 +58,14 @@ export function safePlayBarkaOnChannel(channel: VoiceChannel) {
       log.info(MESSAGES.ended(versionLabel, guild.name));
     });
 
-    player.once('error', err => {
+    player.once('error', (err: any) => {
       clearTimeout(timeout);
       conn.destroy();
       activeConnections.delete(guild.id);
       log.error(MESSAGES.error(guild.name, err.message));
     });
 
-  }).catch( err => {
+  }).catch((err: any) => {
     conn.destroy();
     activeConnections.delete(guild.id);
     log.error(MESSAGES.failedConnect(channel.name, err instanceof Error ? err.message : String(err)));

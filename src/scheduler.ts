@@ -15,11 +15,11 @@ export function startScheduler(client: Client) {
         continue;
       }
 
-      guild.channels.fetch().then(channels => {
+      guild.channels.fetch().then((channels: any) => {
         const voiceChannels = channels
           .filter(
-            ch => ch?.type === ChannelType.GuildVoice &&
-              (ch as VoiceChannel).members.filter(m => !m.user.bot).size > 0
+            (ch: any) => ch?.type === ChannelType.GuildVoice &&
+              (ch as VoiceChannel).members.filter((m: any) => !m.user.bot).size > 0
           ) as Map<string, VoiceChannel>;
 
         if (voiceChannels.size === 0) {

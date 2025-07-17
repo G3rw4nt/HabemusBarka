@@ -77,3 +77,7 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
     );
   }
 });
+
+client.login(process.env.DISCORD_TOKEN)
+  .then(() => log.info(MESSAGES.loginSuccess(client.user?.username || '')))
+  .catch(err => log.error(MESSAGES.error('Bot', err.message)));

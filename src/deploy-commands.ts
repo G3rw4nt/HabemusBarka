@@ -13,7 +13,7 @@ const commands = [
   new SlashCommandBuilder()
     .setName('autobarka')
     .setDescription(MESSAGES.autoBarkaDescription)
-    .addStringOption((opt: SlashCommandStringOption) =>
+    .addStringOption((opt: any) =>
       opt.setName('tryb')
         .setDescription( MESSAGES.selectModeDescription)
         .setRequired(true)
