@@ -1,6 +1,6 @@
 # HabemusBarka
 
-Prosty bot Discorda odtwarzający "Barkę" w kanałach głosowych.
+Prosty bot Discorda odtwarzający "Barkę" na kanałach głosowych serwerów Discorda, na których jest obecny o godzinie 21:37.
 
 ## Wymagania
 
