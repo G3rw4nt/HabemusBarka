@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import { Client, ChannelType, VoiceChannel } from 'discord.js';
+import { Client, ChannelType, VoiceChannel, Collection, GuildBasedChannel } from 'discord.js';
 import { safePlayBarkaOnChannel } from './utils';
 import { log } from './logger';
 import { MESSAGES } from './messages';
@@ -29,8 +29,8 @@ export function startScheduler(client: Client) {
 
         const random = Array.from(voiceChannels.values())[Math.floor(Math.random() * voiceChannels.size)];
         safePlayBarkaOnChannel(random);
-      }).catch(err => {
-        log.error(MESSAGES.channelError(guild.name, err instanceof Error ? err.message : String(err)));
+      }).catch((err: Error) => {
+        log.error(MESSAGES.channelError(guild.name, err.message));
       });
     }
   }, {

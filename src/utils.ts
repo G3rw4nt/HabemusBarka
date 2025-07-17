@@ -48,7 +48,7 @@ export function safePlayBarkaOnChannel(channel: VoiceChannel) {
     const timeout = setTimeout(() => {
       conn.destroy();
       activeConnections.delete(guild.id);
-      log.warning(MESSAGES.timeout(guild.name));
+      log.warn(MESSAGES.timeout(guild.name));
     }, PLAY_TIMEOUT_MS);
 
     player.once(AudioPlayerStatus.Idle, () => {

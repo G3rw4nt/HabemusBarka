@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Events, VoiceChannel } from 'discord.js';
+import { Client, GatewayIntentBits, Events, VoiceChannel, Interaction } from 'discord.js';
 import { config } from 'dotenv';
 import { startScheduler } from './scheduler';
 import { safePlayBarkaOnChannel, activeConnections } from './utils';
@@ -6,7 +6,9 @@ import { log } from './logger';
 import { MESSAGES } from './messages';
 import { getVoiceConnection } from '@discordjs/voice';
 import { setAutoplay, isAutoplayEnabled } from './settings';
+import fs from 'fs';
 
+fs.mkdirSync('logs', { recursive: true });
 config();
 
 const client = new Client({
@@ -17,11 +19,11 @@ const client = new Client({
 });
 
 client.once('ready', () => {
-  log(`✅ Zalogowano jako ${client.user?.tag}`);
+  log.info(`✅ Zalogowano jako ${client.user?.tag}`);
   startScheduler(client);
 });
 
-client.on(Events.InteractionCreate, async interaction => {
+client.on(Events.InteractionCreate, async (interaction: Interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const { commandName, guild, member } = interaction;
@@ -48,7 +50,7 @@ client.on(Events.InteractionCreate, async interaction => {
       conn.destroy();
       activeConnections.delete(guild.id);
       await interaction.reply(MESSAGES.disconnected);
-      log(MESSAGES.manualDisconnect(guild.name));
+      log.info(MESSAGES.manualDisconnect(guild.name));
     } else {
       await interaction.reply({ content: MESSAGES.notConnected, ephemeral: true });
     }
@@ -75,5 +77,3 @@ client.on(Events.InteractionCreate, async interaction => {
     );
   }
 });
-
-client.login(process.env.DISCORD_TOKEN);

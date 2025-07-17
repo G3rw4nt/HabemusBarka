@@ -9,7 +9,7 @@ export const MESSAGES = {
   joined: (version: string, guild: string, channel: string) => `🎵 ${version} rozpoczęta na "${guild}" w kanale "${channel}"!`,
   ended: (version: string, guild: string) => `✅ ${version} zakończona na "${guild}" - pokój z Wami.`,
   timeout: (guild: string) => `⌛ Minął czas czuwania. Opuszczam "${guild}". Ave!`,
-  failedConnect: (channel: string) => `🚫 Nie wstąpiłem do "${channel}". Duch sieci nie pozwolił.`,
+  failedConnect: (channel: string, error: string) => `🚫 Nie wstąpiłem do "${channel}". Duch sieci nie pozwolił: ` + error,
   error: (guild: string, msg: string) => `❌ Katastrofa duchowa na "${guild}": ${msg}`,
   manualDisconnect: (guild: string) => `🙌 Opuściłem kanał na "${guild}" - ręka ludzka mnie wygnała.`,
   barkaDescription: 'Niech rozbrzmi Barka, jak Pan przykazał ⛵',
@@ -28,3 +28,4 @@ export const MESSAGES = {
   elektroBarka: '💥 ELEKTROBARKA 💿⚡',
   loginSuccess: (username: string) => `✅ Zalogowano jako ${username}. Habemus Papam! Mamy Papieża.`
 };
+ 

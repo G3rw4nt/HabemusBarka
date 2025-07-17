@@ -1,4 +1,4 @@
-import { REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { REST, Routes, SlashCommandBuilder, SlashCommandStringOption } from 'discord.js';
 import 'dotenv/config';
 import { MESSAGES } from './messages';
 import { log } from './logger';
@@ -13,7 +13,7 @@ const commands = [
   new SlashCommandBuilder()
     .setName('autobarka')
     .setDescription(MESSAGES.autoBarkaDescription)
-    .addStringOption(opt =>
+    .addStringOption((opt: SlashCommandStringOption) =>
       opt.setName('tryb')
         .setDescription( MESSAGES.selectModeDescription)
         .setRequired(true)

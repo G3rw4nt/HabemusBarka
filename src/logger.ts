@@ -1,4 +1,3 @@
-// src/logger.ts
 import winston from 'winston';
 
 export const log = winston.createLogger({
@@ -9,6 +8,6 @@ export const log = winston.createLogger({
   ),
   transports: [
     new winston.transports.Console({ format: winston.format.colorize({ all: true }) }),
-    new winston.transports.File({ filename: 'barka.log' })
+    new winston.transports.File({ filename: 'logs/habemusbarka.log' })
   ]
 });
