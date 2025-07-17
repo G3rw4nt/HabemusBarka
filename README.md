@@ -29,12 +29,7 @@ docker run --rm --env-file .env habemusbarka npm run deploy
 
 ## Uruchomienie bota
 
-```bash
-docker run -d --name habemusbarka \
-  --env-file .env \
-  -v $(pwd)/autoplay-settings.json:/app/autoplay-settings.json \
-  -v $(pwd)/barka.log:/app/barka.log \
-  habemusbarka
-```
+`docker run -d --name habemusbarka --env-file .env -v %cd%/autoplay-settings.json:/app/autoplay-settings.json -v %cd%/barka.log:/app/barka.log habemusbarka
+`
 
 Pliki `autoplay-settings.json` oraz `barka.log` będą przechowywane na hoście.
